@@ -94,18 +94,6 @@ typedef struct IOTHUB_DEVICE_CONFIGURATION_ADD_TAG
     IOTHUB_DEVICE_CONFIGURATION_METRICS_DEFINITION metrics;         //version 1+
 } IOTHUB_DEVICE_CONFIGURATION_ADD;
 
-#define IOTHUB_DEVICE_CONFIGURATION_UPDATE_VERSION_1 1
-typedef struct IOTHUB_DEVICE_CONFIGURATION_UPDATE_TAG
-{
-    int version;
-    const char* configurationId;                                    //version 1+
-    const char* targetCondition;                                    //version 1+
-    int priority;                                                   //version 1+
-
-    IOTHUB_DEVICE_CONFIGURATION_LABELS labels;                      //version 1+
-    IOTHUB_DEVICE_CONFIGURATION_METRICS_DEFINITION metrics;         //version 1+
-} IOTHUB_DEVICE_CONFIGURATION_UPDATE;
-
 /** @brief Handle to hide struct and use it in consequent APIs
 */
 typedef struct IOTHUB_SERVICE_CLIENT_DEVICE_CONFIGURATION_TAG* IOTHUB_SERVICE_CLIENT_DEVICE_CONFIGURATION_HANDLE;
@@ -157,12 +145,11 @@ MOCKABLE_FUNCTION(, IOTHUB_DEVICE_CONFIGURATION_RESULT, IoTHubDeviceConfiguratio
 */
 MOCKABLE_FUNCTION(, IOTHUB_DEVICE_CONFIGURATION_RESULT, IoTHubDeviceConfiguration_AddConfiguration, IOTHUB_SERVICE_CLIENT_DEVICE_CONFIGURATION_HANDLE, serviceClientDeviceConfigurationHandle, const IOTHUB_DEVICE_CONFIGURATION_ADD*, configurationAdd, IOTHUB_DEVICE_CONFIGURATION*, configuration);
 
-/** @brief  Updates (partial update) the given Configuration in IoT Hub.
+/** @brief  Updates the given Configuration in IoT Hub.
 *
 * @param    serviceClientDeviceConfigurationHandle    The handle created by a call to the create function.
-* @param    configurationUpdate     IOTHUB_DEVICE_CONFIGURATION_UPDATE structure containing
-*                                   the new configuration info. Note that Configuration content cannot be updated.
-* @param    configuration           Output parameter, if it is not NULL will contain the updated configuration info structure
+* @param    configuration           IOTHUB_DEVICE_CONFIGURATION structure containing the new configuration info. 
+*                                   Note that Configuration content cannot be updated.
 *
 * @return   IOTHUB_DEVICE_CONFIGURATION_RESULT upon success or an error code upon failure.
 */
